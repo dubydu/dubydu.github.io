@@ -12,6 +12,13 @@
 </ul>
 <p><em>vpn-list.scpt</em></p>
 <ul>
+<li>Usage</li>
+</ul>
+<p><code>osascript /path/to/your/vpn-list.scpt</code></p>
+<blockquote>
+<p><code>osascript</code> (Apple Script command)</p>
+</blockquote>
+<ul>
 <li>Auto-Switch VPN Every 5 Minutes<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">property vpnList : &#123;&quot;_.nordvpn.com.tcp&quot;, &quot;_.nordvpn.com.tcp&quot;&#125;</span><br><span class="line">property currentIndex : 1</span><br><span class="line"></span><br><span class="line">on run</span><br><span class="line">    repeat</span><br><span class="line">        set vpnName to item currentIndex of vpnList</span><br><span class="line"></span><br><span class="line">        tell application &quot;Tunnelblick&quot;</span><br><span class="line">            disconnect all</span><br><span class="line">            delay 5 -- short pause to allow disconnect</span><br><span class="line">            connect vpnName</span><br><span class="line">        end tell</span><br><span class="line"></span><br><span class="line">        display notification &quot;Switched VPN to &quot; &amp; vpnName with title &quot;VPN Auto Switch&quot;</span><br><span class="line"></span><br><span class="line">        -- Move to next VPN in the list</span><br><span class="line">        if currentIndex = (count of vpnList) then</span><br><span class="line">            set currentIndex to 1</span><br><span class="line">        else</span><br><span class="line">            set currentIndex to currentIndex + 1</span><br><span class="line">        end if</span><br><span class="line"></span><br><span class="line">        delay 300 -- wait 5 minutes (300 seconds)</span><br><span class="line">    end repeat</span><br><span class="line">end run</span><br></pre></td></tr></table></figure></li>
 </ul>
 <p><em>ip-rotator.scpt</em></p>
